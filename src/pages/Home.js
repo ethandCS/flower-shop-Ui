@@ -1,8 +1,16 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const Home = () => {
+const Home = ({ isLoggedIn, setShowLoginModal }) => {
   const navigate = useNavigate();
+
+  const handleNavigate = (path) => {
+    if (isLoggedIn) {
+      navigate(path);
+    } else {
+      setShowLoginModal(true);
+    }
+  };
 
   return (
     <div style={{ textAlign: "center", padding: "20px" }}>
@@ -11,13 +19,13 @@ const Home = () => {
       <div style={{ marginTop: "20px" }}>
         <button
           style={{ margin: "10px", padding: "10px 20px", fontSize: "16px" }}
-          onClick={() => navigate("/inventory")}
+          onClick={() => handleNavigate("/inventory")}
         >
           Inventory Management
         </button>
         <button
           style={{ margin: "10px", padding: "10px 20px", fontSize: "16px" }}
-          onClick={() => navigate("/transactions")}
+          onClick={() => handleNavigate("/transactions")}
         >
           Transactions
         </button>
